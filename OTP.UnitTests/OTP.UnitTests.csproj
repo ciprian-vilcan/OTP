@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OTP.Domain\OTP.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
