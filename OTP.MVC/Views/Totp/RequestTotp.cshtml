@@ -1,0 +1,7 @@
+﻿<h1>Request a TOTP</h1>
+@using (Html.BeginForm("RequestTotp", "Totp", FormMethod.Post))
+{
+    <label for="userId">User Id:</label>
+    <input type="text" id="userId" name="userId" />
+    <input type="submit" id="btnSubmit" value="Request TOTP">
+}

@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OTP.Web", "OTP.Web\OTP.Web.csproj", "{860188F3-3B5F-4AB2-A7ED-38F57681F7E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OTP.Domain", "OTP.Domain\OTP.Domain.csproj", "{73C19960-8A85-4010-9C94-84A843101C0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OTP.Domain", "OTP.Domain\OTP.Domain.csproj", "{73C19960-8A85-4010-9C94-84A843101C0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OTP.UnitTests", "OTP.UnitTests\OTP.UnitTests.csproj", "{6E73794B-D078-4424-812C-87FD99EED105}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OTP.UnitTests", "OTP.UnitTests\OTP.UnitTests.csproj", "{6E73794B-D078-4424-812C-87FD99EED105}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OTP.MVC", "OTP.MVC\OTP.MVC.csproj", "{B8A42F7F-0EC5-479C-B93F-D137D7A17269}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OTP.Web", "OTP.Web\OTP.Web.csproj", "{E1F44EC6-E815-4AD4-A4F1-0D666A2A8EBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{860188F3-3B5F-4AB2-A7ED-38F57681F7E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{860188F3-3B5F-4AB2-A7ED-38F57681F7E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{860188F3-3B5F-4AB2-A7ED-38F57681F7E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{860188F3-3B5F-4AB2-A7ED-38F57681F7E1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{73C19960-8A85-4010-9C94-84A843101C0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{73C19960-8A85-4010-9C94-84A843101C0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73C19960-8A85-4010-9C94-84A843101C0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +25,14 @@ Global
 		{6E73794B-D078-4424-812C-87FD99EED105}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E73794B-D078-4424-812C-87FD99EED105}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E73794B-D078-4424-812C-87FD99EED105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8A42F7F-0EC5-479C-B93F-D137D7A17269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8A42F7F-0EC5-479C-B93F-D137D7A17269}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8A42F7F-0EC5-479C-B93F-D137D7A17269}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8A42F7F-0EC5-479C-B93F-D137D7A17269}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1F44EC6-E815-4AD4-A4F1-0D666A2A8EBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1F44EC6-E815-4AD4-A4F1-0D666A2A8EBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1F44EC6-E815-4AD4-A4F1-0D666A2A8EBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1F44EC6-E815-4AD4-A4F1-0D666A2A8EBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

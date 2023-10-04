@@ -1,0 +1,9 @@
+﻿<h1>Validate a TOTP</h1>
+@using (Html.BeginForm("ValidateTotp", "Totp", FormMethod.Post))
+{
+    <label for="userId">User Id:</label>
+    <input type="text" id="userId" name="userId" />
+    <label for="totp">TOTP:</label>
+    <input type="text" id="totp" name="TOTP" />
+    <input type="submit" id="btnSubmit" value="Request TOTP">
+}
