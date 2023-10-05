@@ -4,7 +4,7 @@ public interface IOtpRepository
 {
     void SaveOtp(NonEmptyString userId, HashedTotp otpHash);
 
-    HashedTotp? GetLatestActiveTotpHash(NonEmptyString userId);
+    HashedTotp? GetLatestTotpHash(NonEmptyString userId);
 
     /// <summary>
     /// Uses up a totp and invalidate it for any future usage.

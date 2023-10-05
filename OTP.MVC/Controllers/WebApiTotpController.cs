@@ -2,13 +2,13 @@
 using OTP.Domain;
 namespace OTP.Web.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/totp")]
 [ApiController]
-public class OtpController : ControllerBase
+public class WebApiTotpController : ControllerBase
 {
     private readonly IOtpService otpService;
 
-    public OtpController(IOtpService otpService)
+    public WebApiTotpController(IOtpService otpService)
     {
         this.otpService = otpService;
     }

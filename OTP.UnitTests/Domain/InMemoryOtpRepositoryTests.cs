@@ -17,7 +17,7 @@ public sealed class InMemoryOtpRepositoryTests
         repo.SaveOtp(userId, otpHash);
         repo.SaveOtp(userId, secondHash);
 
-        var actual = repo.GetLatestActiveTotpHash(userId);
+        var actual = repo.GetLatestTotpHash(userId);
 
         // Assert
         Assert.Equal(secondHash, actual);
@@ -29,7 +29,7 @@ public sealed class InMemoryOtpRepositoryTests
         // Arrange
 
         // Act
-        var actual = repo.GetLatestActiveTotpHash(new NonEmptyString("user1"));
+        var actual = repo.GetLatestTotpHash(new NonEmptyString("user1"));
 
         // Assert
         Assert.Null(actual);
@@ -47,7 +47,7 @@ public sealed class InMemoryOtpRepositoryTests
     }
 
     [Fact]
-    public void UseUpOtpDoesNothing_RemovesLastEntry()
+    public void UseUpOtpExisting_RemovesLastEntry()
     {
         // Arrange
         var userId = new NonEmptyString("user1");
@@ -58,7 +58,7 @@ public sealed class InMemoryOtpRepositoryTests
         repo.SaveOtp(userId, otpHash);
         repo.UseUpOtp(userId, otpHash.HashedOtp);
 
-        var actual = repo.GetLatestActiveTotpHash(new NonEmptyString("user1"));
+        var actual = repo.GetLatestTotpHash(new NonEmptyString("user1"));
 
         // Assert
         Assert.Null(actual);

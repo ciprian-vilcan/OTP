@@ -21,7 +21,7 @@ public sealed class InMemoryOtpRepository : IOtpRepository
         }
     }
 
-    public HashedTotp? GetLatestActiveTotpHash(NonEmptyString userId)
+    public HashedTotp? GetLatestTotpHash(NonEmptyString userId)
     {
         if (!UserHashedTotps.ContainsKey(userId))
         {

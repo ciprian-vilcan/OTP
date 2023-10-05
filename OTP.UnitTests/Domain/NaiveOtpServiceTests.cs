@@ -1,9 +1,4 @@
 ﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OTP.UnitTests.Domain;
 
@@ -22,7 +17,7 @@ public class NaiveOtpServiceTests
     }
 
     [Fact]
-    public void OtpIsOfGivenLength()
+    public void GenerateTotp_OtpIsOfGivenLength()
     {
         // Arrange
 
@@ -34,7 +29,7 @@ public class NaiveOtpServiceTests
     }
 
     [Fact]
-    public void OtpIsNumerical()
+    public void GenerateTotp_OtpIsNumerical()
     {
         // Arrange
 
@@ -43,6 +38,49 @@ public class NaiveOtpServiceTests
 
         // Assert
         Assert.True(int.TryParse(actual.Otp, out _));
+    }
+
+    [Fact]
+    public void GenerateTotp_ExpiresAtLaterThanCreateAt()
+    {
+        // Arrange
+
+        // Act
+        var actual = sut.GenerateTotp(userId, DateTimeOffset.UtcNow);
+
+        // Assert
+        Assert.Equal(TimeSpan.FromSeconds(30), TimeSpan.FromTicks(actual.ExpiresAt.UtcTicks - actual.CreatedAt.UtcTicks));
+    }
+
+    [Fact]
+    public void ValidateOtp_NoOtpStored_ReturnsFalse()
+    {
+        // Arrange
+
+        // Act
+        var actual = sut.ValidateOtp(userId, new OneTimePassword("something"), DateTimeOffset.UtcNow);
+
+        // Assert
+        Assert.False(actual);
+    }
+
+    [Fact]
+    public void ValidateExpiredOtp_ReturnsFalse()
+    {
+        // Arrange
+        var hashedOtp = new Hash("hashed otp");
+        hashServiceMock.Setup(call => call.Hash(It.IsAny<string>())).Returns(hashedOtp);
+        var activeTotpHashes = new Queue<HashedTotp?>(new[]
+            {
+                new HashedTotp(hashedOtp, DateTimeOffset.UtcNow.AddSeconds(-2), DateTimeOffset.UtcNow.AddSeconds(-1))
+            });
+        otpRepoMock.Setup(call => call.GetLatestTotpHash(userId)).Returns(activeTotpHashes.Dequeue);
+
+        // Act
+        var actual = sut.ValidateOtp(userId, new OneTimePassword("something"), DateTimeOffset.UtcNow);
+
+        // Assert
+        Assert.False(actual);
     }
 
     [Fact]
@@ -56,7 +94,7 @@ public class NaiveOtpServiceTests
                 new HashedTotp(hashedOtp, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow.AddSeconds(123)),
                 null
             });
-        otpRepoMock.Setup(call => call.GetLatestActiveTotpHash(userId)).Returns(activeTotpHashes.Dequeue);
+        otpRepoMock.Setup(call => call.GetLatestTotpHash(userId)).Returns(activeTotpHashes.Dequeue);
 
         // Act
         var totp = sut.GenerateTotp(userId, DateTimeOffset.UtcNow);
@@ -66,17 +104,5 @@ public class NaiveOtpServiceTests
         // Assert
         Assert.True(firstValidation);
         Assert.False(secondValidation);
-    }
-
-    [Fact]
-    public void ExpiresAtLaterThanCreateAt()
-    {
-        // Arrange
-
-        // Act
-        var actual = sut.GenerateTotp(userId, DateTimeOffset.UtcNow);
-
-        // Assert
-        Assert.Equal(TimeSpan.FromSeconds(30), TimeSpan.FromTicks(actual.ExpiresAt.UtcTicks - actual.CreatedAt.UtcTicks));
     }
 }

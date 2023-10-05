@@ -36,9 +36,9 @@ public sealed class NaiveOtpService : IOtpService
     public bool ValidateOtp(NonEmptyString userId, OneTimePassword otp, DateTimeOffset momentOfRequest)
     {
         var hashedOtp = hashService.Hash(otp);
-        var latestTotpHash = otpRepository.GetLatestActiveTotpHash(userId);
+        var latestTotpHash = otpRepository.GetLatestTotpHash(userId);
 
-        if (latestTotpHash != null && latestTotpHash.HashedOtp == hashedOtp)
+        if (latestTotpHash != null && latestTotpHash.HashedOtp == hashedOtp && latestTotpHash.ExpiresAt >= DateTimeOffset.UtcNow)
         {
             otpRepository.UseUpOtp(userId, hashedOtp);
             return true;
